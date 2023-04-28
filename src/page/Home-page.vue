@@ -48,10 +48,10 @@ export default {
         this.notes = JSON.parse(localNotes);
       }
     },
-    handleSubmit(title) {
+    handleSubmit(formValue) {
       const note = {
-        title: title,
-        tags: [],
+        title: formValue.value,
+        tags: formValue.tags,
       };
       this.notes.push(note);
     },

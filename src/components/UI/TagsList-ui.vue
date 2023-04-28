@@ -5,9 +5,9 @@
       v-for="item in items"
       :key="item"
       @click="$emit('onItemClick', item)"
-      :class="{isPreview: isPreview}"
+      :class="{isPreview: isPreview, isActive: isActive}"
     >
-      <span>{{item }}</span>
+      {{item }}
     </div>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="note-form__wrapper">
     <form class="note-form" @submit.prevent="onSubmit">
       <textarea required v-model="value" placeholder="Add new note" />
-      <TagsList isPreview @onItemClick="onHandleClick" :items="tags"/>
+      <TagsList isActive @onItemClick="onHandleClick" :items="tags"/>
       <button class="btn btnPrimary" type="submit">Add new note</button>
     </form>
   </div>
@@ -18,16 +18,45 @@ export default {
     return {
       value: '',
       tags: ['home', 'work', 'learn'],
+      activeTags: [], // массив для активных тегов
     };
   },
   methods: {
-    onSubmit() {
-      this.$emit('onSubmit', this.value);
+        onSubmit() {
+      const value = this.value
+      const tags = this.activeTags
+
+      this.$emit('onSubmit', {value, tags});
       this.value = '';
+      
+      this.activeTags = []
+      console.log(this.activeTags)
     },
     onHandleClick(tag) {
-      console.log(tag)
-    }
+      const item = this.activeTags.find((el) => el === tag)
+
+      if (item !== tag) {               // проверка, чтобы теги не повторялись
+        this.activeTags.push(tag)
+        console.log(this.activeTags) // чтобы видеть выбранные теги, пока не разобрался как добавлять активный класс 
+      }
+    },
+
+    // onHandleClick(tag) {      // метод принимает 2 параметра: item и isActive
+    //   const item = this.activeTags.find((el) => el === tag)
+
+    //   if (item !== tag.item) { // проверка, что такой тег еще не добавлен
+    //     tag.isActive = true   // делаем тег активным
+    //     this.activeTags.push(tag.item) // добавляем тег в массив активных тегов
+    //   }
+    // },
+    // onSubmit() {
+    //   const value = this.value
+    //   const tags = this.activeTags
+
+    //   this.$emit('onSubmit', {value, tags});  // отпраляем значение заметку и теги
+    //   this.value = '';      // сбрасываем textarea и активные теги
+    //   this.activeTags = []
+    // },
   },
 };
 </script>
