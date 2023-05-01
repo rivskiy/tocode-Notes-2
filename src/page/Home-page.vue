@@ -6,6 +6,7 @@
 <script>
 import Form from "@/components/notes/Form-notes.vue";
 import List from "@/components/notes/List-notes.vue";
+import utils from "@/utils.js";
 
 export default {
   components: {
@@ -13,25 +14,25 @@ export default {
     List,
   },
   mounted() {
-    this.getLocalNotes()
+    utils.getLocalNotes();
   },
   methods: {
-    getLocalNotes() {
-      this.$store.dispatch('getLocalNotes')
-    },
-
     handleSubmit(formValue) {
-      this.$store.dispatch('submitNote', formValue)
+      this.$store.dispatch('submitNote', formValue);
+
+      utils.setLocalNotes();
     },
 
     handleRemove(index) {
-      this.$store.dispatch('removeNote', index)
+      this.$store.dispatch('removeNote', index);
+
+      utils.setLocalNotes();
     },
   },
   computed: {
     getNotes() {
-      return this.$store.getters.getNotes
-    }
-  }
+      return this.$store.getters.getNotes;
+    },
+  },
 };
 </script>
