@@ -25,25 +25,20 @@ export default {
         onSubmit() {
       const value = this.value
       const tags = this.activeTags
-
       this.$emit('onSubmit', {value, tags});
       this.value = '';
       
       this.activeTags = []
-      console.log(this.activeTags)
     },
     onHandleClick(tag) {
       const item = this.activeTags.find((el) => el === tag)
-
       if (item !== tag) {               // проверка, чтобы теги не повторялись
         this.activeTags.push(tag)
         console.log(this.activeTags) // чтобы видеть выбранные теги, пока не разобрался как добавлять активный класс 
       }
     },
-
     // onHandleClick(tag) {      // метод принимает 2 параметра: item и isActive
     //   const item = this.activeTags.find((el) => el === tag)
-
     //   if (item !== tag.item) { // проверка, что такой тег еще не добавлен
     //     tag.isActive = true   // делаем тег активным
     //     this.activeTags.push(tag.item) // добавляем тег в массив активных тегов
@@ -52,7 +47,6 @@ export default {
     // onSubmit() {
     //   const value = this.value
     //   const tags = this.activeTags
-
     //   this.$emit('onSubmit', {value, tags});  // отпраляем значение заметку и теги
     //   this.value = '';      // сбрасываем textarea и активные теги
     //   this.activeTags = []
