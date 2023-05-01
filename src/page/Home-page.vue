@@ -12,7 +12,14 @@ export default {
     Form,
     List,
   },
+  mounted() {
+    this.getLocalNotes()
+  },
   methods: {
+    getLocalNotes() {
+      this.$store.dispatch('getLocalNotes')
+    },
+
     handleSubmit(formValue) {
       this.$store.dispatch('submitNote', formValue)
     },

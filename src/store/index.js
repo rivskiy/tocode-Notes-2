@@ -24,11 +24,19 @@ export const store = createStore({
         tags: formValue.tags
       }
       state.notes.push(note)
+      localStorage.setItem('notes', JSON.stringify(state.notes))
     },
 
     removeNote(state, index) {
       state.notes.splice(index, 1)
-      
+      localStorage.setItem('notes', JSON.stringify(state.notes))
+    },
+
+    getLocalNotes(state) {
+      const localNotes = localStorage.getItem('notes')
+      if (JSON.parse(localNotes).length > 0) {
+        state.notes = JSON.parse(localNotes)
+      }
     }
   },
   actions: {
@@ -38,6 +46,10 @@ export const store = createStore({
 
     removeNote({commit}, index) {
       commit('removeNote', index)
+    },
+
+    getLocalNotes({commit}) {
+      commit('getLocalNotes')
     }
   },
   getters: {
