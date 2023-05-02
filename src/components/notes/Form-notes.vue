@@ -2,7 +2,7 @@
   <div class="note-form__wrapper">
     <form class="note-form" @submit.prevent="onSubmit">
       <textarea required v-model="value" placeholder="Add new note" />
-      <TagsList isActive @onItemClick="onHandleClick" :items="tags"/>
+      <TagsList isActive @onItemClick="onHandleClick" :items="tags" />
       <button class="btn btnPrimary" type="submit">Add new note</button>
     </form>
   </div>
@@ -18,39 +18,32 @@ export default {
     return {
       value: '',
       tags: ['home', 'work', 'learn'],
-      activeTags: [], // массив для активных тегов
     };
   },
   methods: {
-        onSubmit() {
-      const value = this.value
-      const tags = this.activeTags
-      this.$emit('onSubmit', {value, tags});
+    onSubmit() {
+      const note = {
+        title: this.value,
+        tags: this.onHandleClick(),
+      };
+
       this.value = '';
-      
-      this.activeTags = []
+      document
+        .querySelectorAll('div.tag-item.isActive')
+        .forEach((e) => e.classList.toggle('isActive'));
+
+      this.$emit('onSubmit', note);
     },
-    onHandleClick(tag) {
-      const item = this.activeTags.find((el) => el === tag)
-      if (item !== tag) {               // проверка, чтобы теги не повторялись
-        this.activeTags.push(tag)
-        console.log(this.activeTags) // чтобы видеть выбранные теги, пока не разобрался как добавлять активный класс 
-      }
+
+    onHandleClick() {
+      event.target.classList.toggle('isActive');
+
+      let tags = [];
+      document
+        .querySelectorAll('div.tag-item.isActive')
+        .forEach((e) => tags.push(e.textContent));
+      return tags;
     },
-    // onHandleClick(tag) {      // метод принимает 2 параметра: item и isActive
-    //   const item = this.activeTags.find((el) => el === tag)
-    //   if (item !== tag.item) { // проверка, что такой тег еще не добавлен
-    //     tag.isActive = true   // делаем тег активным
-    //     this.activeTags.push(tag.item) // добавляем тег в массив активных тегов
-    //   }
-    // },
-    // onSubmit() {
-    //   const value = this.value
-    //   const tags = this.activeTags
-    //   this.$emit('onSubmit', {value, tags});  // отпраляем значение заметку и теги
-    //   this.value = '';      // сбрасываем textarea и активные теги
-    //   this.activeTags = []
-    // },
   },
 };
 </script>

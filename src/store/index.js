@@ -19,11 +19,7 @@ export const store = createStore({
   },
 
   mutations: {
-    submitNote(state, formValue) {
-      const note = {
-        title: formValue.value,
-        tags: formValue.tags
-      }
+    submitNote(state, note) {
       state.notes.push(note)
     },
 
@@ -33,8 +29,8 @@ export const store = createStore({
   },
 
   actions: {
-    submitNote({ commit }, formValue) {
-      commit('submitNote', formValue)
+    submitNote({ commit }, note) {
+      commit('submitNote', note)
     },
 
     removeNote({ commit }, index) {

@@ -4,10 +4,10 @@
       class="tag-item"
       v-for="item in items"
       :key="item"
-      @click="$emit('onItemClick', item)"
-      :class="{isPreview: isPreview, isActive: isActive}"
+      @click="$emit('onItemClick')"
+      :class="{isPreview: isPreview, isActive: false}"
     >
-      {{item }}
+       {{item }}
     </div>
   </div>
 </template>

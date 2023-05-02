@@ -6,27 +6,23 @@
 <script>
 import Form from "@/components/notes/Form-notes.vue";
 import List from "@/components/notes/List-notes.vue";
-import utils from "@/utils.js";
-
+import {setLocalNotes, getLocalNotes} from "@/utils.js";
 export default {
   components: {
     Form,
     List,
   },
   mounted() {
-    utils.getLocalNotes();
+    getLocalNotes();
   },
   methods: {
     handleSubmit(formValue) {
       this.$store.dispatch('submitNote', formValue);
-
-      utils.setLocalNotes();
+      setLocalNotes();
     },
-
     handleRemove(index) {
       this.$store.dispatch('removeNote', index);
-
-      utils.setLocalNotes();
+      setLocalNotes();
     },
   },
   computed: {
