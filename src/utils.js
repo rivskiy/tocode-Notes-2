@@ -7,7 +7,7 @@ export function setLocalNotes() {
 
 export function getLocalNotes() {
   const localNotes = localStorage.getItem('notes')
-  if (JSON.parse(localNotes).length > 0) {
+  if (JSON.parse(localNotes)) {
     store.state.notes = JSON.parse(localNotes)
   }
 }

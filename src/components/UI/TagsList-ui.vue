@@ -7,7 +7,7 @@
       @click="$emit('onItemClick')"
       :class="{isPreview: isPreview, isActive: false}"
     >
-       {{item }}
+       {{item}}
     </div>
   </div>
 </template>
@@ -44,6 +44,9 @@ export default {
   border-radius: 22px;
   user-select: none;
   cursor: pointer;
+  &:before {
+      content: "#";
+    }
   &.isActive {
     background-color: #444ce0;
     color: #fff;
@@ -52,9 +55,7 @@ export default {
     padding: 0;
     color: #444ce0;
     cursor: default;
-    &:before {
-      content: "#";
-    }
+
   }
   &:last-child {
     margin-right: 0;

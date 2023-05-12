@@ -1,8 +1,8 @@
 <template>
   <div class="note-form__wrapper">
     <form class="note-form" @submit.prevent="onSubmit">
-      <textarea required v-model="value" placeholder="Add new note" />
-      <TagsList isActive @onItemClick="onHandleClick" :items="tags" />
+      <textarea required v-model="value" placeholder="Add new note"/>
+      <TagsList isActive @onItemClick="onHandleClick" :items="tags"/>
       <button class="btn btnPrimary" type="submit">Add new note</button>
     </form>
   </div>
